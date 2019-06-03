@@ -93,7 +93,7 @@
               </assemblyArtifact>
               <configFile>target/classes/config/server.xml</configFile>
               <appArchive>${project.build.directory}/${project.artifactId}.war</appArchive>
-              <packageFile>${project.build.directory}/${project.artifactId}.jar</packageFile>
+              <packageFile>${project.build.directory}/${project.artifactId}_runnable.jar</packageFile>
               <include>runnable,minify</include>
               <serverName>${project.artifactId}</serverName>
               <installAppPackages>project</installAppPackages>
