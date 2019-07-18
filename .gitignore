@@ -1,0 +1,7 @@
+/.apt_generated/
+/.classpath
+/.factorypath
+/.project
+/.settings/
+/target/
+.DS_Store
