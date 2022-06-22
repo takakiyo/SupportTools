@@ -37,6 +37,12 @@ IBM Japan</P>
 	<LI><A href="networkaddress.cache.jsp">InetAddress Cache Policy</A></LI>
 	<LI><A href="security.provider.jsp">Security Provider</A></LI>
 </UL>
+<H2>Trouble Test</H2>
+<UL>
+	<li>CPU Loader <a href="cpuload?action=start">start/add</a> / <a href="cpuload?action=stop">stop all</a>
+	<li>Long response <a href="longResponse?time=10000">10sec.</a> / <a href="longResponse">1min.</a> / <a href="longResponse?time=99999999">Infinity</a></li>
+	<li>Process Abend <a href="sigsegv">SIGSEGV</a> / <a href="sigsegv?sig=kill">SIGKILL</a></li>
+</UL>
 </BODY>
 <!--
 	WebSphere Application Server: Support Tools
@@ -53,5 +59,6 @@ IBM Japan</P>
 	2010-11-25    1.8    tnk    Added InetAddress Cache Policy
 	2012-05-11    1.9    tnk    Support Windows 7/Mac OS X
 	2016-08-10    2.0    tnk    fix JDNI lookup tool
+	2022-06-22    3.0    tnk    fix JDNI lookup tool
 -->
 </HTML>

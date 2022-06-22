@@ -4,7 +4,7 @@
 	<display-name>SupportWeb</display-name>
 	<description>
 		WebSphere Application Server: Support tools Copyright (c)
-		2003-2007, Tanaka Takakiyo (takakiyo@jp.ibm.com)
+		2003-2022, Tanaka Takakiyo (takakiyo@jp.ibm.com)
 	</description>
 	<distributable />
 	<servlet>
@@ -118,6 +118,24 @@
 		<description></description>
 		<servlet-class>com.ibm.jp.support.os.OsEnvServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>LongResponseServlet</servlet-name>
+		<display-name>LongResponseServlet</display-name>
+		<description></description>
+		<servlet-class>com.ibm.jp.support.http.LongResponseServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CpuLoadServlet</servlet-name>
+		<display-name>CpuLoadServlet</display-name>
+		<description></description>
+		<servlet-class>com.ibm.jp.support.os.CpuLoadServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>SigsegvServlet</servlet-name>
+		<display-name>SigsegvServlet</display-name>
+		<description></description>
+		<servlet-class>com.ibm.jp.support.os.SigsegvServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ClassInfoDumper</servlet-name>
 		<url-pattern>/classInfo</url-pattern>
@@ -177,6 +195,18 @@
 	<servlet-mapping>
 		<servlet-name>OsEnvServlet</servlet-name>
 		<url-pattern>/osEnv</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LongResponseServlet</servlet-name>
+		<url-pattern>/longResponse</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CpuLoadServlet</servlet-name>
+		<url-pattern>/cpuload</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SigsegvServlet</servlet-name>
+		<url-pattern>/sigsegv</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
