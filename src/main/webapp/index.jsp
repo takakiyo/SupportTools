@@ -59,6 +59,6 @@ IBM Japan</P>
 	2010-11-25    1.8    tnk    Added InetAddress Cache Policy
 	2012-05-11    1.9    tnk    Support Windows 7/Mac OS X
 	2016-08-10    2.0    tnk    fix JDNI lookup tool
-	2022-06-22    3.0    tnk    fix JDNI lookup tool
+	2022-06-22    3.0    tnk    Added Trouble Tests
 -->
 </HTML>
