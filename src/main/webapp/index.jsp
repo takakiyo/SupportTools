@@ -17,7 +17,7 @@ IBM Japan</P>
 <UL>
 	<LI><A href="jndiLookup">JNDI Lookup Test</A></LI>
 	<LI><A href="classInfo">Class Infomation Dumper</A></LI>
-	<LI><A href="heapWatcher">Heap Watcher</A></LI>
+	<LI><A href="heapWatcher">Heap Watcher (Heap Loader)</A></LI>
 	<LI><A href="encodingTest">Encoding Test</A></LI>
 	<LI><A href="senderr.jsp">HTTP Error code Test</A></LI>
 	<li><a href="javaDump">Create Java Dump</a></li>
@@ -60,5 +60,6 @@ IBM Japan</P>
 	2012-05-11    1.9    tnk    Support Windows 7/Mac OS X
 	2016-08-10    2.0    tnk    fix JDNI lookup tool
 	2022-06-22    3.0    tnk    Added Trouble Tests
+	2022-06-29    3.1    tnk    Added Heap load function to Heap Watcher
 -->
 </HTML>
