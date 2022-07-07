@@ -136,6 +136,12 @@
 		<description></description>
 		<servlet-class>com.ibm.jp.support.os.SigsegvServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>NullPoServlet</servlet-name>
+		<display-name>NullPoServlet</display-name>
+		<description></description>
+		<servlet-class>com.ibm.jp.support.NullPoServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ClassInfoDumper</servlet-name>
 		<url-pattern>/classInfo</url-pattern>
@@ -207,6 +213,10 @@
 	<servlet-mapping>
 		<servlet-name>SigsegvServlet</servlet-name>
 		<url-pattern>/sigsegv</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>NullPoServlet</servlet-name>
+		<url-pattern>/nullpo</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

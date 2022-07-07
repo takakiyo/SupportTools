@@ -42,6 +42,7 @@ IBM Japan</P>
 	<li>CPU Loader <a href="cpuload?action=start">start/add</a> / <a href="cpuload?action=stop">stop all</a>
 	<li>Long response <a href="longResponse?time=10000">10sec.</a> / <a href="longResponse">1min.</a> / <a href="longResponse?time=99999999">Infinity</a></li>
 	<li>Process Abend <a href="sigsegv">SIGSEGV</a> / <a href="sigsegv?sig=kill">SIGKILL</a></li>
+	<li><a href="nullpo">NullPointerException</a></li>
 </UL>
 </BODY>
 <!--
