@@ -13,7 +13,7 @@ pageEncoding="UTF-8"
 </head>
 <body>
 <h1>Send Error Test</h1>
-<form action="sendErrorTest" method="POST">
+<form action="sendErrorTest" method="GET">
 <table border="1">
 	<tbody>
 		<tr>

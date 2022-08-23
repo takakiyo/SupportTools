@@ -211,11 +211,11 @@ System.out.println(size);
 			out.println("</FORM>");
 			out.println("<HR>");
 		}
-		out.println("<FORM action=\"" + req.getRequestURI() + "\" method=\"POST\">");
+		out.println("<FORM action=\"" + req.getRequestURI() + "\" method=\"GET\">");
 		out.println("<INPUT type=\"SUBMIT\" value=\"Gerbage Collection\" name=\"Command\">");
 		out.println("</FORM>");
 		out.println("<HR>");
-		out.println("<FORM action=\"" + req.getRequestURI() + "\" method=\"POST\">");
+		out.println("<FORM action=\"" + req.getRequestURI() + "\" method=\"GET\">");
 		out.println("Size: <INPUT type=\"text\" value=\"128000\" name=\"size\">bytes");
 		out.println("<INPUT type=\"SUBMIT\" value=\"Load on Heap\" name=\"Command\">");
 		out.println("<INPUT type=\"SUBMIT\" value=\"Unload All\" name=\"Command\">");
