@@ -42,7 +42,6 @@
 						<type>zip</type>
 					</assemblyArtifact>
 					<include>minify</include>
-					<serverName>${project.artifactId}</serverName>
 				</configuration>
 			</plugin>
 		</plugins>
