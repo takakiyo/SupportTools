@@ -216,7 +216,11 @@ public class OsInfoServlet extends HttpServlet implements Servlet {
 
 				out.println("<H2>Process List</H2>");
 				beginTable(out);
-				drawCmdOutput(out, "ps -efl", "/bin/ksh LANG=C ps -efl");
+				if (MacOS_X) {
+					drawCmdOutput(out, "ps auxwww", "/bin/ksh LANG=C ps auxwww");
+				} else {
+					drawCmdOutput(out, "ps -efl", "/bin/ksh LANG=C ps -efl");
+				}
 				endTable(out);
 
 				if (AIX) {
@@ -319,7 +323,9 @@ public class OsInfoServlet extends HttpServlet implements Servlet {
 			beginTable(out);
 			if (UNIX) {
 				drawCmdOutput(out, "netstat -in", "/bin/ksh LANG=C netstat -in");
-				drawCmdOutput(out, "netstat -v", "/bin/ksh LANG=C netstat -v");
+				if (!MacOS_X) {
+					drawCmdOutput(out, "netstat -v", "/bin/ksh LANG=C netstat -v");
+				}
 				drawCmdOutput(out, "netstat -m", "/bin/ksh LANG=C netstat -m");
 				drawCmdOutput(out, "netstat -rn", "/bin/ksh LANG=C netstat -rn");
 				drawCmdOutput(out, "netstat -s", "/bin/ksh LANG=C netstat -s");
