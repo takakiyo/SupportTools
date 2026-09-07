@@ -128,7 +128,10 @@ public class OsInfoServlet extends HttpServlet {
             if (MacOS_X) {
                 drawCmdOutput(out, "uname -a",  new String[]{"uname", "-a"});
                 drawCmdOutput(out, "sw_vers",   new String[]{"sw_vers"});
-                drawCmdOutput(out, "hostinfo",  new String[]{"hostinfo"});
+                // sysctl hw/kern: CPU・メモリ・カーネルの基本情報
+                // hostinfo は macOS 13 Ventura で廃止されたため sysctl で代替
+                drawCmdOutput(out, "sysctl hw",   new String[]{"/bin/sh", "-c", "sysctl hw"});
+                drawCmdOutput(out, "sysctl kern", new String[]{"/bin/sh", "-c", "sysctl kern"});
             } else {
                 drawCmdOutput(out, "uname -a",  new String[]{"/bin/sh", "-c", "LANG=C uname -a"});
             }
@@ -159,14 +162,20 @@ public class OsInfoServlet extends HttpServlet {
                 drawCmdOutput(out, "swap -l",  new String[]{"/bin/sh", "-c", "LANG=C swap -l"});
                 drawCmdOutput(out, "swap -s",  new String[]{"/bin/sh", "-c", "LANG=C swap -s"});
             } else if (MacOS_X) {
-                drawCmdOutput(out, "vm_stat",   new String[]{"vm_stat"});
-                drawCmdOutput(out, "/var/vm",   new String[]{"/bin/sh", "-c", "ls -l /private/var/vm/"});
+                drawCmdOutput(out, "vm_stat",             new String[]{"vm_stat"});
+                // /private/var/vm/ は macOS 10.15 Catalina 以降で廃止
+                // sysctl vm.swapusage でスワップ使用量を確認
+                drawCmdOutput(out, "sysctl vm.swapusage", new String[]{"/bin/sh", "-c", "sysctl vm.swapusage"});
             }
             endTable(out);
 
             out.println("<h2>Disk Space Info</h2>");
             beginTable(out);
             drawCmdOutput(out, "df -k", new String[]{"/bin/sh", "-c", "LANG=C df -k"});
+            if (MacOS_X) {
+                // APFS ボリューム・パーティション構成の確認 (macOS 10.13 High Sierra 以降)
+                drawCmdOutput(out, "diskutil list", new String[]{"diskutil", "list"});
+            }
             endTable(out);
 
             out.println("<h2>IPC Stat</h2>");
@@ -230,6 +239,14 @@ public class OsInfoServlet extends HttpServlet {
                 endTable(out);
             }
 
+            if (MacOS_X) {
+                // launchctl: macOS のサービス管理 (launchd ベース)
+                out.println("<h2>Running Services (launchd)</h2>");
+                beginTable(out);
+                drawCmdOutput(out, "launchctl list", new String[]{"launchctl", "list"});
+                endTable(out);
+            }
+
             out.println("<h2>Process List</h2>");
             beginTable(out);
             if (MacOS_X) {
@@ -238,6 +255,20 @@ public class OsInfoServlet extends HttpServlet {
                 drawCmdOutput(out, "ps -efl", new String[]{"/bin/sh", "-c", "LANG=C ps -efl"});
             }
             endTable(out);
+
+            if (MacOS_X) {
+                // インストール済みパッケージ情報
+                out.println("<h2>Installed Packages</h2>");
+                beginTable(out);
+                // pkgutil: macOS 標準のパッケージ管理 (Apple/App Store 系)
+                drawCmdOutput(out, "pkgutil --pkgs",
+                              new String[]{"/bin/sh", "-c", "pkgutil --pkgs"});
+                // Homebrew がインストールされていれば一覧を取得
+                drawCmdOutput(out, "brew list --versions",
+                              new String[]{"/bin/sh", "-c",
+                                  "brew list --versions 2>/dev/null || echo 'Homebrew not installed'"});
+                endTable(out);
+            }
 
             if (AIX) {
                 out.println("<h2>Installed Software Modules</h2>");
@@ -379,6 +410,14 @@ public class OsInfoServlet extends HttpServlet {
             }
             drawCmdOutput(out, "arp -a",       new String[]{"/bin/sh", "-c", "LANG=C arp -a"});
             drawCmdOutput(out, "ifconfig -a",  new String[]{"/bin/sh", "-c", "LANG=C ifconfig -a"});
+            if (MacOS_X) {
+                // scutil: macOS のネットワーク設定・DNS・プロキシ情報
+                drawCmdOutput(out, "scutil --nwi",        new String[]{"scutil", "--nwi"});
+                drawCmdOutput(out, "scutil --dns",        new String[]{"scutil", "--dns"});
+                drawCmdOutput(out, "scutil --proxy",      new String[]{"scutil", "--proxy"});
+                drawCmdOutput(out, "networksetup -listallhardwareports",
+                              new String[]{"networksetup", "-listallhardwareports"});
+            }
             if (AIX) {
                 drawCmdOutput(out, "no -a", new String[]{"/bin/sh", "-c", "LANG=C no -a"});
             }
