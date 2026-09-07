@@ -142,6 +142,12 @@
 		<description></description>
 		<servlet-class>com.ibm.jp.support.NullPoServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AppServerInfoServlet</servlet-name>
+		<display-name>AppServerInfoServlet</display-name>
+		<description>Detects and displays application server type and version information.</description>
+		<servlet-class>com.ibm.jp.support.server.AppServerInfoServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ClassInfoDumper</servlet-name>
 		<url-pattern>/classInfo</url-pattern>
@@ -217,6 +223,10 @@
 	<servlet-mapping>
 		<servlet-name>NullPoServlet</servlet-name>
 		<url-pattern>/nullpo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AppServerInfoServlet</servlet-name>
+		<url-pattern>/appServerInfo</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

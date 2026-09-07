@@ -29,6 +29,7 @@ IBM Japan</P>
 	<LI><A href="threadDump">Thread Dump</A></LI>
 	<% } %>
 	<LI><A href="systemProperties">JVM System Properties</A></LI>
+	<LI><A href="appServerInfo">Application Server Infomation</A></LI>
 	<LI><A href="osEnv">OS Environments</A></LI>
 	<LI><A href="osInfo">OS Infomation</A></LI>
 	<LI><A href="snoop">HTTP Request infomations (snoop)</A></LI>
