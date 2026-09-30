@@ -7,4 +7,7 @@
 - `Env.isTiger()` is a legacy check for Java >= 1.5 ("Tiger" was Sun's codename). It is still in JSPs for historical compatibility — not a mistake.
 - `HeapWatchServlet.java` has a `// Decompiled by Jad` header — it was originally a compiled-only artifact that was decompiled and checked in as source. Treat existing logic with caution.
 - There are **no tests** and no test infrastructure at all in this project.
-- The `web.xml` uses the **Servlet 2.3 DTD** (not schema), which is an extremely old format — this is intentional for broad WAS version compatibility.
+- The `web.xml` uses the **Servlet 2.3 DTD** (not schema) — this is intentional for broad WAS version compatibility; do not suggest upgrading it.
+- `Html` utility has three public methods: `escapeChar()` (HTML entities), `escapeStackTrace()` (for exceptions), `unescapeChar()` (reverse), and `decodeUTF8()` (decodes `&#NNNN;` numeric references sent by old MSIE).
+- `ClassCache` stores `Class<?>` objects via `WeakReference` to prevent classloader leaks — relevant context for heap/classloader troubleshooting questions.
+- The `index.jsp` welcome page uses `Env.isTiger()` to conditionally show the Thread Dump link — features gated by `Env.isTiger()` require Java 5+.
