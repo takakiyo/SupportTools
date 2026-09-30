@@ -20,6 +20,7 @@ IBM Japan</P>
 	<LI><A href="heapWatcher">Heap Watcher (Heap Loader)</A></LI>
 	<LI><A href="encodingTest">Encoding Test</A></LI>
 	<LI><A href="senderr.jsp">HTTP Error code Test</A></LI>
+	<LI><A href="setCookie">Cookie Set</A></LI>
 	<li><a href="javaDump">Create Java Dump</a></li>
 </UL>
 <H2>View Informations</H2>
