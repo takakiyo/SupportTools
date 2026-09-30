@@ -31,6 +31,7 @@
 <tr><td>Session ID from HttpSession</td><td><%= session.getId() %></td></tr>
 <tr><td>Created Time</td><td><%= formatter.format(new Date(session.getCreationTime())) %></td></tr>
 <tr><td>Last Accessed Time</td><td><%= formatter.format(new Date(session.getLastAccessedTime())) %></td></tr>
+<tr><td>Current Time</td><td><%= formatter.format(new Date()) %></td></tr>
 <tr><td>Max Inactive Interval</td><td><%= session.getMaxInactiveInterval() %></td></tr>
 </TABLE>
 <H2>Session Object Contents</H2><%	
@@ -75,6 +76,131 @@ if (values == null) {
 </UL>
 
 <% } %>
+
+<H2>Request Information</H2>
+<H3>Basic Request</H3>
+<TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><td>Method</td><td><%= escapeChar(request.getMethod()) %></td></tr>
+<tr><td>Request URI</td><td><%= escapeChar(request.getRequestURI()) %></td></tr>
+<tr><td>Request URL</td><td><%= escapeChar(request.getRequestURL().toString()) %></td></tr>
+<tr><td>Query String</td><td><%= request.getQueryString() == null ? "(none)" : escapeChar(request.getQueryString()) %></td></tr>
+<tr><td>Context Path</td><td><%= escapeChar(request.getContextPath()) %></td></tr>
+<tr><td>Servlet Path</td><td><%= escapeChar(request.getServletPath()) %></td></tr>
+<tr><td>Path Info</td><td><%= request.getPathInfo() == null ? "(none)" : escapeChar(request.getPathInfo()) %></td></tr>
+<tr><td>Path Translated</td><td><%= request.getPathTranslated() == null ? "(none)" : escapeChar(request.getPathTranslated()) %></td></tr>
+<tr><td>Protocol</td><td><%= escapeChar(request.getProtocol()) %></td></tr>
+<tr><td>Scheme</td><td><%= escapeChar(request.getScheme()) %></td></tr>
+<tr><td>isSecure</td><td><%= request.isSecure() %></td></tr>
+<tr><td>Content Type</td><td><%= request.getContentType() == null ? "(none)" : escapeChar(request.getContentType()) %></td></tr>
+<tr><td>Content Length</td><td><%= request.getContentLength() %></td></tr>
+<tr><td>Character Encoding</td><td><%= request.getCharacterEncoding() == null ? "(none)" : escapeChar(request.getCharacterEncoding()) %></td></tr>
+<tr><td>Locale</td><td><%= escapeChar(request.getLocale().toString()) %></td></tr>
+</TABLE>
+<H3>Client / Server</H3>
+<TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><td>Remote Address</td><td><%= escapeChar(request.getRemoteAddr()) %></td></tr>
+<tr><td>Remote Host</td><td><%= escapeChar(request.getRemoteHost()) %></td></tr>
+<tr><td>Remote Port</td><td><%= request.getRemotePort() %></td></tr>
+<tr><td>Local Address</td><td><%= escapeChar(request.getLocalAddr()) %></td></tr>
+<tr><td>Local Name</td><td><%= escapeChar(request.getLocalName()) %></td></tr>
+<tr><td>Local Port</td><td><%= request.getLocalPort() %></td></tr>
+<tr><td>Server Name</td><td><%= escapeChar(request.getServerName()) %></td></tr>
+<tr><td>Server Port</td><td><%= request.getServerPort() %></td></tr>
+</TABLE>
+<H3>Auth / User</H3>
+<TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><td>Auth Type</td><td><%= request.getAuthType() == null ? "(none)" : escapeChar(request.getAuthType()) %></td></tr>
+<tr><td>Remote User</td><td><%= request.getRemoteUser() == null ? "(none)" : escapeChar(request.getRemoteUser()) %></td></tr>
+<tr><td>User Principal</td><td><%= request.getUserPrincipal() == null ? "(none)" : escapeChar(request.getUserPrincipal().getName()) %></td></tr>
+</TABLE>
+<H3>Request Headers</H3>
+<TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><th>Name</th><th>Value</th></tr><%
+{
+    Enumeration headerNames = request.getHeaderNames();
+    if (headerNames != null) {
+        while (headerNames.hasMoreElements()) {
+            String hname = (String) headerNames.nextElement();
+            Enumeration hvals = request.getHeaders(hname);
+            while (hvals.hasMoreElements()) {
+                String hval = (String) hvals.nextElement();
+%><tr><td><%= escapeChar(hname) %></td><td><%= escapeChar(hval) %></td></tr><%
+            }
+        }
+    }
+}
+%>
+</TABLE>
+<H3>Request Parameters</H3><%
+{
+    Enumeration paramNames = request.getParameterNames();
+    if (!paramNames.hasMoreElements()) {
+%>There are no request parameters.<%
+    } else {
+%><TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><th>Name</th><th>Value</th></tr><%
+        while (paramNames.hasMoreElements()) {
+            String pname = (String) paramNames.nextElement();
+            String[] pvals = request.getParameterValues(pname);
+            for (int pi = 0; pi < pvals.length; pi++) {
+%><tr><td><%= escapeChar(pname) %></td><td><%= escapeChar(pvals[pi]) %></td></tr><%
+            }
+        }
+%></TABLE><%
+    }
+}
+%>
+<H3>Request Attributes</H3><%
+{
+    Enumeration attrNames = request.getAttributeNames();
+    if (!attrNames.hasMoreElements()) {
+%>There are no request attributes.<%
+    } else {
+%><TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><th>Name</th><th>Class</th><th>Value</th></tr><%
+        while (attrNames.hasMoreElements()) {
+            String aname = (String) attrNames.nextElement();
+            Object aobj = request.getAttribute(aname);
+%><tr><td><%= escapeChar(aname) %></td><td><%= aobj == null ? "(null)" : escapeChar(aobj.getClass().getName()) %></td><td><%= aobj == null ? "(null)" : escapeChar(aobj.toString()) %></td></tr><%
+        }
+%></TABLE><%
+    }
+}
+%>
+<H3>Cookies</H3><%
+{
+    javax.servlet.http.Cookie[] cookies = request.getCookies();
+    if (cookies == null || cookies.length == 0) {
+%>There are no cookies.<%
+    } else {
+%><TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF">
+<tr><th>Name</th><th>Value</th><th>Domain</th><th>Path</th><th>Max Age</th><th>Secure</th><th>HttpOnly</th></tr><%
+        for (int ci = 0; ci < cookies.length; ci++) {
+            javax.servlet.http.Cookie ck = cookies[ci];
+%><tr>
+<td><%= escapeChar(ck.getName()) %></td>
+<td><%= escapeChar(ck.getValue() == null ? "(null)" : ck.getValue()) %></td>
+<td><%= ck.getDomain() == null ? "(none)" : escapeChar(ck.getDomain()) %></td>
+<td><%= ck.getPath() == null ? "(none)" : escapeChar(ck.getPath()) %></td>
+<td><%= ck.getMaxAge() %></td>
+<td><%= ck.getSecure() %></td>
+<td><%= ck.isHttpOnly() %></td>
+</tr><%
+        }
+%></TABLE><%
+    }
+}
+%>
+<H3>Call Stack Trace</H3>
+<PRE><%
+{
+    StackTraceElement[] elems = new Throwable().getStackTrace();
+    for (int si = 0; si < elems.length; si++) {
+        out.print(escapeChar("\tat " + elems[si].toString()));
+        out.println();
+    }
+}
+%></PRE>
 
 </body>
 </html>
