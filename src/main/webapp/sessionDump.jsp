@@ -44,6 +44,11 @@ if (values == null) {
 <TABLE Border="2" WIDTH="100%" BGCOLOR="#DDDDFF"><%
     for (int i = 0; i < values.length; i++) {
         Object obj = session.getValue(values[i]);
+        if (obj == null) {
+%><TR><TD colspan=2 align="center">Name: <B><%= escapeChar(values[i]) %></B></TD></TR>
+<TR><TD>Object Class</TD><TD>(null)</TD></TR><%
+            continue;
+        }
         byte[] data = null;
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
