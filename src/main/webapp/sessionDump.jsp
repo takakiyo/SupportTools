@@ -35,6 +35,9 @@
 <tr><td>Max Inactive Interval</td><td><%= session.getMaxInactiveInterval() %></td></tr>
 </TABLE>
 <H2>Session Object Contents</H2><%	
+// output for messages.log
+System.out.println("sessionDump.jsp: execute");
+System.out.println(request.getSession());
 String values[] = session.getValueNames();
 if (values == null) {
 %>There is no content in the session.<%
@@ -182,6 +185,7 @@ if (values == null) {
 <tr><th>Name</th><th>Value</th><th>Domain</th><th>Path</th><th>Max Age</th><th>Secure</th><th>HttpOnly</th></tr><%
         for (int ci = 0; ci < cookies.length; ci++) {
             javax.servlet.http.Cookie ck = cookies[ci];
+            System.out.println("sessionDump.jsp: Coookie " + ck.getName() + " = \"" + ck.getValue() + "\"");
 %><tr>
 <td><%= escapeChar(ck.getName()) %></td>
 <td><%= escapeChar(ck.getValue() == null ? "(null)" : ck.getValue()) %></td>
